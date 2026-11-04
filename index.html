@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hamburgueria Artesanal | Ofertas Black Friday & Cardápio</title>
+  <meta name="description" content="O hambúrguer artesanal mais suculento e saboroso da região. Aproveite as ofertas exclusivas da Black Friday com até 40% OFF e peça direto no WhatsApp!" />
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍔</text></svg>" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fff7ed',
+              100: '#ffedd5',
+              400: '#fb923c',
+              500: '#f97316',
+              600: '#ea580c',
+              gold: '#ffb703'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts & Custom CSS -->
+  <link rel="stylesheet" href="css/custom.css" />
+</head>
+<body class="bg-[#0a0a0c] text-gray-100 antialiased selection:bg-orange-500 selection:text-white">
+
+  <!-- ============================================== -->
+  <!-- 1. TOP ANNOUNCEMENT BAR (BLACK FRIDAY ALERT)   -->
+  <!-- ============================================== -->
+  <div id="black-friday-banner" class="bg-gradient-to-r from-red-700 via-orange-600 to-amber-600 text-white py-2.5 px-4 text-xs sm:text-sm font-bold shadow-lg relative z-40">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
+      <div class="flex items-center gap-2">
+        <span class="bg-black/30 px-2 py-0.5 rounded uppercase tracking-wider text-[11px] font-extrabold flex items-center gap-1">
+          <span class="w-2 h-2 rounded-full bg-red-400 animate-ping"></span>
+          <span class="bf-campaign-tag">🔥 BLACK FRIDAY BURGER WEEK</span>
+        </span>
+        <span class="hidden md:inline text-white/90 font-medium">| Cupom <strong class="text-amber-200 bf-coupon-code">BLACKFRIDAY10</strong> para R$ 10 OFF</span>
+      </div>
+
+      <!-- Mini Countdown Timer no Topo -->
+      <div class="flex items-center gap-2 font-mono text-xs font-black">
+        <span class="text-amber-200 uppercase text-[10px] tracking-wider font-sans font-bold">Termina em:</span>
+        <div class="flex items-center gap-1 bg-black/40 px-2.5 py-1 rounded-lg border border-white/20">
+          <span id="timer-hours">00</span>h
+          <span class="text-amber-300">:</span>
+          <span id="timer-minutes">00</span>m
+          <span class="text-amber-300">:</span>
+          <span id="timer-seconds">00</span>s
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- 2. NAVBAR                                      -->
+  <!-- ============================================== -->
+  <header class="sticky top-0 z-30 bg-[#0d0d10]/95 backdrop-blur-md border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-orange-600 to-amber-500 p-0.5 shadow-lg shadow-orange-500/20 group-hover:scale-105 transition-transform">
+          <div class="w-full h-full bg-[#111115] rounded-[10px] flex items-center justify-center text-xl">
+            🍔
+          </div>
+        </div>
+        <div>
+          <span class="text-xl sm:text-2xl font-black font-heading text-white tracking-wide block leading-tight restaurant-name">
+            THE KING BURGER
+          </span>
+          <span class="text-[10px] sm:text-xs text-orange-400 font-bold uppercase tracking-widest block">
+            Craft & Smash
+          </span>
+        </div>
+      </a>
+
+      <!-- Status & Links Centrais (Desktop) -->
+      <div class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-300">
+        <div class="flex items-center gap-2 bg-[#17171e] px-3 py-1.5 rounded-full border border-white/10 text-xs">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-emerald-400 font-bold">Aberto Agora</span>
+          <span class="text-gray-500">•</span>
+          <span class="text-gray-300 restaurant-hours">18h às 23h45</span>
+        </div>
+
+        <nav class="flex items-center gap-6">
+          <a href="#ofertas" class="text-amber-400 font-bold hover:text-amber-300 transition-colors flex items-center gap-1.5">
+            <span>🔥</span> Ofertas Black Friday
+          </a>
+          <a href="#cardapio" class="hover:text-white transition-colors">Cardápio</a>
+          <a href="#diferenciais" class="hover:text-white transition-colors">Diferenciais</a>
+          <a href="#avaliacoes" class="hover:text-white transition-colors">Avaliações</a>
+          <a href="#onde-estamos" class="hover:text-white transition-colors">Localização</a>
+        </nav>
+      </div>
+
+      <!-- Botão de Carrinho / Pedido -->
+      <div class="flex items-center gap-3">
+        <button 
+          onclick="window.toggleCart()" 
+          class="relative px-4 py-2.5 sm:px-5 sm:py-2.5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold text-xs sm:text-sm rounded-xl shadow-lg shadow-orange-500/25 flex items-center gap-2.5 active:scale-95 transition-all"
+        >
+          <div class="relative">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+            </svg>
+            <span class="cart-count-badge absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-black w-4 h-4 rounded-full flex items-center justify-center" style="display: none;">0</span>
+          </div>
+          <span class="hidden sm:inline">Meu Pedido</span>
+          <span class="cart-total text-white/90 font-extrabold sm:border-l sm:border-white/30 sm:pl-2.5">R$ 0,00</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================== -->
+  <!-- 3. HERO SECTION (ALTA CONVERSÃO)              -->
+  <!-- ============================================== -->
+  <section class="relative pt-8 pb-16 lg:pt-16 lg:pb-24 overflow-hidden">
+    <!-- Luzes de fundo / Gradients -->
+    <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-orange-600/15 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="absolute -top-24 right-0 w-[400px] h-[400px] bg-amber-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        <!-- Texto & Headline -->
+        <div class="lg:col-span-7 text-center lg:text-left">
+          
+          <!-- Selo de Black Friday Urgente -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-red-950/80 to-orange-950/80 border border-red-500/40 text-red-400 text-xs sm:text-sm font-bold uppercase tracking-wider mb-6 pulse-badge">
+            <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+            <span class="bf-headline-badge">OFERTAS EXCLUSIVAS DE BLACK FRIDAY</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black font-heading text-white uppercase tracking-tight leading-[1.08]">
+            O Hambúrguer Artesanal <br class="hidden sm:inline" />
+            <span class="text-gradient-fire">Mais Suculento</span> da Cidade Chegou com Descontos Reais!
+          </h1>
+
+          <p class="mt-5 text-base sm:text-lg text-gray-300 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal">
+            Blend 100% Angus fresco grelhado na chapa estalando, crostinha perfeita, queijo cheddar derretido e pão brioche dourado na manteiga. Peça direto no WhatsApp sem pagar comissão de aplicativo.
+          </p>
+
+          <!-- Badges de Prova Social Rápida -->
+          <div class="mt-6 flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs sm:text-sm text-gray-300">
+            <div class="flex items-center gap-1.5 bg-[#14141a] px-3 py-1.5 rounded-lg border border-white/10">
+              <span class="text-amber-400 text-base">⭐</span>
+              <span><strong class="text-white google-rating">4.9</strong> no Google (<span class="total-reviews">1.450+</span> avaliações)</span>
+            </div>
+            <div class="flex items-center gap-1.5 bg-[#14141a] px-3 py-1.5 rounded-lg border border-white/10">
+              <span class="text-emerald-400 text-base">🛵</span>
+              <span>Entrega Quentinha em <strong class="text-white delivery-time">30-45 min</strong></span>
+            </div>
+          </div>
+
+          <!-- CTAs Principais -->
+          <div class="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+            <a 
+              href="#ofertas" 
+              class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-extrabold text-base rounded-2xl shadow-xl shadow-orange-500/30 flex items-center justify-center gap-2.5 glow-primary-hover active:scale-95 transition-all text-center"
+            >
+              <span>🔥 Ver Combos Black Friday</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+              </svg>
+            </a>
+
+            <a 
+              href="#cardapio" 
+              class="w-full sm:w-auto px-7 py-4 bg-[#181820] hover:bg-[#20202a] text-white font-bold text-base rounded-2xl border border-white/15 hover:border-orange-500/50 flex items-center justify-center gap-2 active:scale-95 transition-all text-center"
+            >
+              <span>🍔 Cardápio Completo</span>
+            </a>
+          </div>
+
+          <!-- Aviso de Frete Grátis e Cupom -->
+          <div class="mt-6 flex items-center justify-center lg:justify-start gap-2 text-xs text-gray-400">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Ganhe <strong>FRETE GRÁTIS</strong> em pedidos acima de R$ 70</span>
+          </div>
+
+        </div>
+
+        <!-- Imagem Hero Food Porn -->
+        <div class="lg:col-span-5 relative flex justify-center">
+          
+          <!-- Badge flutuante Desconto -->
+          <div class="absolute -top-4 -left-4 sm:top-2 sm:left-2 z-20 bg-gradient-to-r from-red-600 to-orange-600 text-white p-3 sm:p-4 rounded-2xl shadow-2xl border border-white/20 transform -rotate-6 shimmer-effect">
+            <span class="block text-[10px] font-bold uppercase tracking-wider text-amber-200">Black Friday</span>
+            <span class="block text-xl sm:text-2xl font-black font-heading leading-tight">ATÉ 40% OFF</span>
+          </div>
+
+          <!-- Badge flutuante Mais Pedido -->
+          <div class="absolute -bottom-4 right-0 sm:bottom-4 sm:right-2 z-20 bg-[#16161df2] backdrop-blur-md text-white p-3 sm:p-3.5 rounded-2xl shadow-2xl border border-white/15 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center text-lg font-bold">
+              👑
+            </div>
+            <div>
+              <div class="text-xs text-gray-400">Avaliado por clientes</div>
+              <div class="text-sm font-bold text-white flex items-center gap-1">
+                <span class="text-amber-400">★★★★★</span> 4.9 de 5.0
+              </div>
+            </div>
+          </div>
+
+          <!-- Moldura da Imagem Principal -->
+          <div class="relative w-full max-w-md sm:max-w-lg aspect-square rounded-3xl overflow-hidden p-2 bg-gradient-to-b from-orange-500/20 via-white/5 to-transparent border border-white/10 glow-primary">
+            <img 
+              src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=80" 
+              alt="Hambúrguer Artesanal Suculento com Queijo e Bacon" 
+              class="w-full h-full object-cover rounded-2xl float-animation"
+            />
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- 4. COMBOS BLACK FRIDAY (HERO DEALS)            -->
+  <!-- ============================================== -->
+  <section id="ofertas" class="py-16 sm:py-20 bg-[#0e0e12] border-y border-white/5 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Cabeçalho da Seção -->
+      <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+        <span class="text-orange-500 font-extrabold text-xs sm:text-sm uppercase tracking-widest block mb-2">
+          🔥 Os Mais Pedidos com Desconto
+        </span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black font-heading text-white uppercase tracking-tight">
+          Combos Irrecusáveis de Black Friday
+        </h2>
+        <p class="text-gray-400 text-sm sm:text-base mt-3 bf-sub-notice">
+          🚨 Estoque de blends frescos limitado para os primeiros 100 pedidos da noite!
+        </p>
+      </div>
+
+      <!-- Grid dos Combos (Renderizado dinamicamente via app.js) -->
+      <div id="featured-deals-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Itens inseridos pelo JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- 5. DIFERENCIAIS ARTESANAIS                    -->
+  <!-- ============================================== -->
+  <section id="diferenciais" class="py-16 sm:py-20 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+        <span class="text-amber-400 font-extrabold text-xs sm:text-sm uppercase tracking-widest block mb-2">
+          Padrão de Qualidade Artesanal
+        </span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black font-heading text-white uppercase tracking-tight">
+          Por que nosso Burger é Incomparável?
+        </h2>
+        <p class="text-gray-400 text-sm sm:text-base mt-3">
+          Aqui não tem carne congelada nem pão seco. Cuidamos de cada detalhe para você ter a melhor experiência da primeira à última mordida.
+        </p>
+      </div>
+
+      <!-- Grid de Diferenciais (Renderizado dinamicamente via app.js) -->
+      <div id="differentials-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Injetado pelo JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- 6. CARDÁPIO COMPLETO COM ABAS & CARRINHO       -->
+  <!-- ============================================== -->
+  <section id="cardapio" class="py-16 sm:py-20 bg-[#0d0d11] border-t border-white/5 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+        <div>
+          <span class="text-orange-500 font-extrabold text-xs sm:text-sm uppercase tracking-widest block mb-2">
+            Cardápio Completo
+          </span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black font-heading text-white uppercase tracking-tight">
+            Escolha seu Hambúrguer
+          </h2>
+          <p class="text-gray-400 text-sm mt-1">
+            Clique em "Adicionar" para montar seu pedido e enviar no WhatsApp em 1 clique!
+          </p>
+        </div>
+
+        <!-- Botão Abrir Pedido no Topo do Cardápio -->
+        <button 
+          onclick="window.toggleCart()" 
+          class="inline-flex items-center gap-2 self-start md:self-auto px-4 py-2.5 bg-[#1e1e27] hover:bg-[#282835] text-amber-300 font-bold text-sm rounded-xl border border-white/10 transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+          </svg>
+          <span>Ver Carrinho (<span class="cart-total">R$ 0,00</span>)</span>
+        </button>
+      </div>
+
+      <!-- Barra de Filtros de Categoria (Scroll Horizontal no mobile) -->
+      <div class="relative mb-10">
+        <div id="categories-container" class="flex items-center gap-2.5 overflow-x-auto pb-3 scrollbar-none no-scrollbar">
+          <!-- Categorias injetadas pelo JS -->
+        </div>
+      </div>
+
+      <!-- Grid dos Produtos -->
+      <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 sm:gap-8">
+        <!-- Produtos injetados pelo JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- 7. PROVA SOCIAL & DEPOIMENTOS REAIS           -->
+  <!-- ============================================== -->
+  <section id="avaliacoes" class="py-16 sm:py-20 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+        <span class="text-emerald-400 font-extrabold text-xs sm:text-sm uppercase tracking-widest block mb-2">
+          Clientes Apaixonados
+        </span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black font-heading text-white uppercase tracking-tight">
+          Quem prova, vira cliente fiel
+        </h2>
+        <p class="text-gray-400 text-sm sm:text-base mt-3">
+          Mais de <strong class="text-white orders-delivered">28.000+</strong> burgers entregues com nota média <strong class="text-amber-400 google-rating">4.9</strong> estrelas.
+        </p>
+      </div>
+
+      <div id="reviews-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Avaliações injetadas pelo JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- 8. LOCALIZAÇÃO, HORÁRIOS & ÁREA DE ENTREGA     -->
+  <!-- ============================================== -->
+  <section id="onde-estamos" class="py-16 sm:py-20 bg-[#0e0e12] border-y border-white/5 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <div class="lg:col-span-6">
+          <span class="text-orange-500 font-extrabold text-xs sm:text-sm uppercase tracking-widest block mb-2">
+            📍 Onde Estamos & Como Pedir
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-black font-heading text-white uppercase tracking-tight">
+            Entregamos na sua casa ou retire no balcão
+          </h2>
+          <p class="text-gray-400 text-sm sm:text-base mt-4 leading-relaxed">
+            Nossa cozinha trabalha a todo vapor para que seu burger chegue no ponto perfeito. Escolha se prefere entrega rápida ou retirar quentinho na nossa loja.
+          </p>
+
+          <div class="mt-8 space-y-4">
+            <div class="flex items-start gap-3.5 bg-glass-card p-4 rounded-xl border border-white/5">
+              <div class="w-10 h-10 rounded-lg bg-orange-500/10 text-orange-400 flex items-center justify-center shrink-0">
+                📍
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-white">Endereço da Hamburgueria</h4>
+                <p class="text-xs sm:text-sm text-gray-400 mt-0.5 restaurant-address">Av. Principal dos Sabores, 450 - Centro</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3.5 bg-glass-card p-4 rounded-xl border border-white/5">
+              <div class="w-10 h-10 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0">
+                ⏰
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-white">Horário de Funcionamento</h4>
+                <p class="text-xs sm:text-sm text-gray-400 mt-0.5 restaurant-hours">Terça a Domingo das 18h às 23h45</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3.5 bg-glass-card p-4 rounded-xl border border-white/5">
+              <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
+                🛵
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-white">Raio de Entrega</h4>
+                <p class="text-xs sm:text-sm text-gray-400 mt-0.5">Entregamos em toda a região com tempo médio de 30-45 minutos.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a 
+              href="#" 
+              target="_blank" 
+              class="maps-link px-5 py-3 bg-[#181822] hover:bg-[#222230] text-white text-xs sm:text-sm font-bold rounded-xl border border-white/10 flex items-center gap-2 transition-colors"
+            >
+              <svg class="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              <span>Abrir no Google Maps</span>
+            </a>
+
+            <a 
+              href="#" 
+              target="_blank" 
+              class="whatsapp-direct-link px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-bold rounded-xl flex items-center gap-2 transition-colors"
+            >
+              <span>Falar no WhatsApp</span>
+            </a>
+          </div>
+
+        </div>
+
+        <div class="lg:col-span-6">
+          <div class="rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative h-80 sm:h-96 bg-neutral-900">
+            <img 
+              src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80" 
+              alt="Ambiente da Hamburgueria" 
+              class="w-full h-full object-cover"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-6">
+              <div class="text-white">
+                <span class="text-xs uppercase tracking-widest text-orange-400 font-bold block">Nossa Cozinha</span>
+                <p class="text-lg font-bold">Produção 100% artesanal, higiene rigorosa e muito sabor.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- 9. FAQ (DÚVIDAS FREQUENTES)                    -->
+  <!-- ============================================== -->
+  <section class="py-16 sm:py-20 relative">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-12">
+        <span class="text-amber-400 font-extrabold text-xs sm:text-sm uppercase tracking-widest block mb-2">
+          Tire suas Dúvidas
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-black font-heading text-white uppercase tracking-tight">
+          Perguntas Frequentes
+        </h2>
+      </div>
+
+      <div id="faq-container" class="space-y-3.5">
+        <!-- Injetado pelo JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- 10. FINAL CALL TO ACTION (URGÊNCIA BLACK FRIDAY)-->
+  <!-- ============================================== -->
+  <section class="py-16 sm:py-20 bg-gradient-to-b from-transparent via-orange-950/20 to-black relative overflow-hidden">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-600/20 border border-red-500/30 text-red-400 font-bold text-xs uppercase tracking-widest mb-6">
+        🔥 ÚLTIMAS HORAS DE DESCONTO
+      </div>
+
+      <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black font-heading text-white uppercase tracking-tight leading-tight">
+        Bateu Aquela Fome de Hambúrguer de Verdade?
+      </h2>
+      
+      <p class="mt-4 text-base sm:text-xl text-gray-300 max-w-2xl mx-auto">
+        Não deixe para amanhã o combo que você pode saborear hoje com até 40% OFF. Faça seu pedido em menos de 1 minuto!
+      </p>
+
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <button 
+          onclick="window.toggleCart()" 
+          class="w-full sm:w-auto px-10 py-5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-black text-lg rounded-2xl shadow-2xl shadow-orange-500/30 flex items-center justify-center gap-3 glow-primary-hover active:scale-95 transition-all"
+        >
+          <span>🛒 Abrir Meu Pedido Agora</span>
+        </button>
+
+        <a 
+          href="#" 
+          target="_blank" 
+          class="whatsapp-direct-link w-full sm:w-auto px-8 py-5 bg-[#171720] hover:bg-[#20202c] text-white font-bold text-base rounded-2xl border border-white/10 flex items-center justify-center gap-2.5 transition-all"
+        >
+          <svg class="w-5 h-5 text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.969.587 1.961.954 3.023.954l.004-.001c3.18 0 5.766-2.586 5.767-5.766.001-3.182-2.585-5.768-5.767-5.768zm0-1.672c4.103 0 7.439 3.336 7.439 7.438 0 4.103-3.336 7.438-7.439 7.438-1.284 0-2.555-.332-3.666-.962l-4.365 1.144 1.164-4.256c-.694-1.157-1.072-2.493-1.072-3.864 0-4.102 3.335-7.438 7.439-7.438z"></path>
+          </svg>
+          <span>Chamar Atendente</span>
+        </a>
+      </div>
+
+      <div class="mt-8 flex items-center justify-center gap-6 text-xs text-gray-400">
+        <span>⚡ Pedido direto no WhatsApp</span>
+        <span>•</span>
+        <span>💳 Pix ou Cartão na Entrega</span>
+        <span>•</span>
+        <span>🛵 Entrega Rápida</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- 11. FOOTER                                     -->
+  <!-- ============================================== -->
+  <footer class="bg-[#070709] border-t border-white/10 py-12 text-gray-400 text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-2xl">🍔</span>
+            <span class="text-xl font-black font-heading text-white restaurant-name">THE KING BURGER</span>
+          </div>
+          <p class="text-xs sm:text-sm text-gray-400 max-w-sm restaurant-desc leading-relaxed">
+            Hambúrgueres artesanais feitos com carinho, técnica e ingredientes de primeiríssima linha.
+          </p>
+          <div class="mt-4 flex items-center gap-3">
+            <a href="#" target="_blank" class="instagram-link text-xs text-orange-400 hover:text-orange-300 font-bold flex items-center gap-1.5">
+              <span>📷</span> <span class="instagram-handle">@theking.burger</span>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-3">Atendimento</h4>
+          <p class="text-xs text-gray-400 restaurant-hours mb-2">Terça a Domingo: 18h às 23h45</p>
+          <p class="text-xs text-gray-400 mb-2">WhatsApp: <strong class="text-white restaurant-phone">(11) 99999-8888</strong></p>
+          <p class="text-xs text-gray-400 restaurant-address">Av. Principal dos Sabores, 450</p>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-3">Formas de Pagamento</h4>
+          <ul class="text-xs space-y-1.5 text-gray-400">
+            <li>✔️ Pix (Instantâneo)</li>
+            <li>✔️ Cartões de Crédito e Débito</li>
+            <li>✔️ Vale Refeição (Consulte pelo Zap)</li>
+            <li>✔️ Dinheiro (com troco informado)</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500 text-center sm:text-left">
+        <p>© 2026 <span class="restaurant-name">The King Burger</span>. Todos os direitos reservados.</p>
+        <p class="text-[11px]">Desenvolvido com foco em alta conversão & funil direto de WhatsApp.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================== -->
+  <!-- 12. CART DRAWER (SLIDE-OVER LATERAL)          -->
+  <!-- ============================================== -->
+  <div id="cart-overlay" onclick="window.toggleCart()" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden transition-opacity"></div>
+  
+  <aside id="cart-drawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-[#111116] border-l border-white/10 z-50 flex flex-col translate-x-full transition-transform duration-300 shadow-2xl">
+    
+    <!-- Header do Drawer -->
+    <div class="p-4 sm:p-5 border-b border-white/10 flex items-center justify-between bg-[#15151c]">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center font-bold">
+          🛒
+        </div>
+        <div>
+          <h3 class="text-base font-bold text-white">Seu Pedido</h3>
+          <p class="text-xs text-gray-400"><span class="cart-count-badge">0</span> itens selecionados</p>
+        </div>
+      </div>
+      <button onclick="window.toggleCart()" class="text-gray-400 hover:text-white p-1.5 rounded-lg hover:bg-white/5 transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Lista de Itens do Carrinho -->
+    <div class="flex-1 overflow-y-auto p-4 sm:p-5 space-y-3" id="cart-drawer-items">
+      <!-- Injetado pelo JS -->
+    </div>
+
+    <!-- Estado Vazio -->
+    <div id="cart-drawer-empty" class="flex-1 flex flex-col items-center justify-center p-6 text-center text-gray-400">
+      <div class="text-5xl mb-3">🍔</div>
+      <h4 class="text-base font-bold text-white mb-1">Seu carrinho está vazio</h4>
+      <p class="text-xs text-gray-400 max-w-xs mb-4">Escolha algum dos nossos burgers suculentos ou combos da Black Friday!</p>
+      <button onclick="window.toggleCart()" class="px-5 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-xs font-bold transition-colors">
+        Explorar Cardápio
+      </button>
+    </div>
+
+    <!-- Footer do Drawer com Dados do Pedido -->
+    <div id="cart-drawer-footer" class="p-4 sm:p-5 border-t border-white/10 bg-[#14141a] space-y-4" style="display: none;">
+      
+      <!-- Modalidade: Entrega ou Retirada -->
+      <div>
+        <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Como deseja receber?</label>
+        <div class="grid grid-cols-2 gap-2 text-xs font-bold">
+          <label class="flex items-center justify-center gap-2 p-2.5 rounded-xl border border-white/10 bg-[#1c1c24] cursor-pointer has-[:checked]:border-orange-500 has-[:checked]:bg-orange-500/10 has-[:checked]:text-orange-400">
+            <input type="radio" name="order_type" value="Entrega" checked onchange="window.toggleDeliveryAddressField()" class="hidden" />
+            <span>🛵 Entrega (Delivery)</span>
+          </label>
+          <label class="flex items-center justify-center gap-2 p-2.5 rounded-xl border border-white/10 bg-[#1c1c24] cursor-pointer has-[:checked]:border-orange-500 has-[:checked]:bg-orange-500/10 has-[:checked]:text-orange-400">
+            <input type="radio" name="order_type" value="Retirada no Balcão" onchange="window.toggleDeliveryAddressField()" class="hidden" />
+            <span>🏪 Retirada no Balcão</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Campos de Identificação e Endereço -->
+      <div class="space-y-2 text-xs">
+        <input 
+          id="customer_name" 
+          type="text" 
+          placeholder="Seu Nome completo" 
+          class="w-full bg-[#1c1c24] border border-white/10 rounded-xl px-3 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500"
+        />
+
+        <div id="delivery-address-box">
+          <input 
+            id="customer_address" 
+            type="text" 
+            placeholder="Rua, Número, Bairro e Complemento" 
+            class="w-full bg-[#1c1c24] border border-white/10 rounded-xl px-3 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500"
+          />
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <select 
+              id="cart_payment_method" 
+              class="w-full bg-[#1c1c24] border border-white/10 rounded-xl px-2.5 py-2 text-white focus:outline-none focus:border-orange-500 text-xs"
+            >
+              <option value="Pix (Chave Instantânea)">💳 Pix</option>
+              <option value="Cartão de Crédito">💳 Cartão de Crédito</option>
+              <option value="Cartão de Débito">💳 Cartão de Débito</option>
+              <option value="Dinheiro">💵 Dinheiro</option>
+            </select>
+          </div>
+          <div>
+            <input 
+              id="customer_general_notes" 
+              type="text" 
+              placeholder="Obs (ex: troco p/ 50)" 
+              class="w-full bg-[#1c1c24] border border-white/10 rounded-xl px-3 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Resumo Financeiro -->
+      <div class="pt-2 border-t border-white/10 space-y-1.5 text-xs">
+        <div class="flex justify-between text-gray-400">
+          <span>Subtotal</span>
+          <span class="cart-subtotal text-white font-medium">R$ 0,00</span>
+        </div>
+        <div class="cart-discount-row flex justify-between text-emerald-400 font-bold" style="display: none;">
+          <span>Desconto Black Friday 🔥</span>
+          <span class="cart-discount-value">- R$ 10,00</span>
+        </div>
+        <div class="flex justify-between text-base font-black text-white pt-1">
+          <span>Total</span>
+          <span class="cart-total text-amber-400 font-heading text-xl">R$ 0,00</span>
+        </div>
+      </div>
+
+      <!-- Botão Disparador do WhatsApp -->
+      <button 
+        onclick="window.finishOrderOnWhatsApp()" 
+        class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-sm uppercase tracking-wide rounded-xl shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-2 active:scale-95 transition-all"
+      >
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.969.587 1.961.954 3.023.954l.004-.001c3.18 0 5.766-2.586 5.767-5.766.001-3.182-2.585-5.768-5.767-5.768zm0-1.672c4.103 0 7.439 3.336 7.439 7.438 0 4.103-3.336 7.438-7.439 7.438-1.284 0-2.555-.332-3.666-.962l-4.365 1.144 1.164-4.256c-.694-1.157-1.072-2.493-1.072-3.864 0-4.102 3.335-7.438 7.439-7.438z"></path>
+        </svg>
+        <span>Finalizar Pedido no WhatsApp</span>
+      </button>
+
+    </div>
+
+  </aside>
+
+  <!-- ============================================== -->
+  <!-- 13. STICKY MOBILE BAR (QUANDO HÁ ITENS)       -->
+  <!-- ============================================== -->
+  <div id="mobile-cart-sticky" class="fixed bottom-0 left-0 right-0 p-3 bg-[#111116]/95 backdrop-blur-md border-t border-white/10 z-40 hidden sm:hidden">
+    <div class="flex items-center justify-between gap-3">
+      <div>
+        <span class="text-[10px] text-gray-400 block" id="sticky-cart-count">0 itens</span>
+        <span class="text-base font-black text-amber-400 font-heading" id="sticky-cart-total">R$ 0,00</span>
+      </div>
+      <button 
+        onclick="window.toggleCart()" 
+        class="flex-1 py-3 px-4 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-black text-xs uppercase tracking-wider rounded-xl shadow-lg flex items-center justify-center gap-2"
+      >
+        <span>Ver Meu Pedido</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- 14. FLOATING WHATSAPP BUTTON (DESKTOP & MOBILE) -->
+  <!-- ============================================== -->
+  <a 
+    href="#" 
+    target="_blank" 
+    class="whatsapp-direct-link fixed bottom-6 right-6 z-40 w-14 h-14 bg-emerald-500 hover:bg-emerald-400 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all pulse-badge group"
+    title="Fale Conosco no WhatsApp"
+  >
+    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.969.587 1.961.954 3.023.954l.004-.001c3.18 0 5.766-2.586 5.767-5.766.001-3.182-2.585-5.768-5.767-5.768zm0-1.672c4.103 0 7.439 3.336 7.439 7.438 0 4.103-3.336 7.438-7.439 7.438-1.284 0-2.555-.332-3.666-.962l-4.365 1.144 1.164-4.256c-.694-1.157-1.072-2.493-1.072-3.864 0-4.102 3.335-7.438 7.439-7.438z"></path>
+    </svg>
+    <span class="absolute right-16 top-1/2 -translate-y-1/2 bg-[#14141a] text-white text-xs font-bold py-1.5 px-3 rounded-lg border border-white/10 shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity hidden sm:block">
+      Dúvidas? Chame no Zap 🍔
+    </span>
+  </a>
+
+  <!-- Scripts -->
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
