@@ -293,7 +293,7 @@ const BURGER_CONFIG = {
       description: "Lata trincando de gelada.",
       price: 6.50,
       originalPrice: null,
-      image: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=600&q=80",
+      image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80",
       badge: ""
     },
     {
