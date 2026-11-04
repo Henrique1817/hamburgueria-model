@@ -17,8 +17,8 @@ const BURGER_CONFIG = {
     logoSubtext: "CRAFT BURGERS",
     
     // Telefone WhatsApp (código do país + DDD + número sem espaços nem traços)
-    whatsappNumber: "5511999998888",
-    whatsappDisplay: "(11) 99999-8888",
+    whatsappNumber: "5511964455296",
+    whatsappDisplay: "(11) 96445-5296",
     
     // Redes e Localização
     instagram: "@theking.burger",
